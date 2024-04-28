@@ -48,12 +48,14 @@ if submit_bmi:
         st.success("🔥输入成功！")
         st.write("您的BMI指数为:",bmi)
         st.write(f"您的身材为: {bmi_level}.")
-    if bmi_level==BMICalculator.OverWeight or bmi_level==BMICalculator.Obese:
-        st.info("❗️❗️❗️注意: 您的体重过于肥胖，请联系我们的健康顾问: xxxxxxxxx")
-    if bmi_level==BMICalculator.UnderWeight:
+    if bmi_level==BMICalculator.OverWeight:
+        st.info("⚠️注意: 您的体重已过重，如有需要，请联系我们的健康顾问: xxxxxxxxx")
+    elif bmi_level==BMICalculator.UnderWeight:
         st.info("⚠️注意: 您的体重过轻，请加强锻炼!")
-    if bmi_level==BMICalculator.NormalWeight:
+    elif bmi_level==BMICalculator.NormalWeight:
         st.info("✅您的体重正常,请继续保持!")
+    elif bmi_level==BMICalculator.Obese:
+        st.info("❗️❗️❗️您的体重过于肥胖,请联系我们的健康顾问: xxxxxxxxx")
 
 ### 4.参考值
 md_table="""
