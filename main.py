@@ -34,14 +34,26 @@ st.markdown(md_height)
 height=st.number_input(label="height",min_value=1.0,max_value=2.5)
 
 # calculate BMI
+md_submit="""
+### 4. 开始计算
+"""
+st.markdown(md_submit)
+submit_bmi=st.button(label="点击计算")
 bmicalculator=BMICalculator()
-bmi,bmi_level=bmicalculator.start(weight,height)
-if bmi is None or bmi_level is None:
-    st.error("❎请输入有效的身高和体重数据")
-else:
-    st.success("🔥输入成功！")
-    st.write("您的BMI指数为:",bmi)
-    st.write(f"您的身材为: {bmi_level}.","请联系我们的健康顾问: xxxxxxx")
+if submit_bmi:
+    bmi,bmi_level=bmicalculator.start(weight,height)
+    if bmi is None or bmi_level is None:
+        st.error("❎请输入有效的身高和体重数据")
+    else:
+        st.success("🔥输入成功！")
+        st.write("您的BMI指数为:",bmi)
+        st.write(f"您的身材为: {bmi_level}.")
+    if bmi_level==BMICalculator.OverWeight or bmi_level==BMICalculator.Obese:
+        st.info("❗️❗️❗️注意: 您的体重过于肥胖，请联系我们的健康顾问: xxxxxxxxx")
+    if bmi_level==BMICalculator.UnderWeight:
+        st.info("⚠️注意: 您的体重过轻，请加强锻炼!")
+    if bmi_level==BMICalculator.NormalWeight:
+        st.info("✅您的体重正常,请继续保持!")
 
 ### 4.参考值
 md_table="""
